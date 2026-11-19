@@ -1,0 +1,14 @@
+node_modules/
+dist/
+data/
+.env
+.env.*
+!.env.example
+public/uploads/*
+!public/uploads/.gitkeep
+.superpowers/
+backups/
+outputs/
+test-results/
+*.log
+.DS_Store

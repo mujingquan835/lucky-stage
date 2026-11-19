@@ -1,0 +1,884 @@
+/* 幸运现场：天蓝、橙红、奶金主题，业务组件保持原结构。 */
+:root {
+  --red: #f24c2f;
+  --border: #dfebf3;
+  --muted: #8499a9;
+  color: #24485e;
+  background: #f0f8fd;
+  --campaign-sky: #36aaf1;
+  --campaign-cream: #fff1bb;
+  --campaign-orange: #ff4b2d;
+}
+body {
+  background:
+    radial-gradient(ellipse at 95% 0, #cfedff80, transparent 52%), #f2f9fd;
+}
+.brand-mark {
+  background: linear-gradient(145deg, #ff853d, #f1372b);
+  color: #fff2bd;
+  box-shadow: 0 4px 12px #f3593526;
+}
+.brand {
+  color: #1f587e;
+}
+.sidebar {
+  background: #ffffffee;
+  border-color: #ddecf6;
+}
+.sidebar nav button {
+  color: #657f92;
+}
+.sidebar nav button.active {
+  background: #fff0e5;
+  color: #e84b25;
+}
+.sidebar nav button:hover {
+  background: #fff6ed;
+}
+.active .nav-count {
+  background: #ffdfc7;
+  color: #d85c2a;
+}
+.topbar {
+  background: #ffffffdb;
+  border-color: #e0edf6;
+}
+.topbar select {
+  background: #f9fcff;
+  border-color: #dbe9f3;
+}
+.page-heading h1 {
+  color: #244f6b;
+}
+.heading-context {
+  color: #6c9dbc;
+}
+.page-heading p {
+  color: #819aaa;
+}
+.button.primary {
+  background: linear-gradient(135deg, #ff783d, #f03e2c);
+  border-color: #ef4b2d;
+  box-shadow: 0 4px 10px #ef5a2b1a;
+}
+.button.primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff8b3e, #e93f27);
+}
+.button {
+  border-color: #dbe8f1;
+  color: #527185;
+}
+.button:hover:not(:disabled) {
+  background: #f2faff;
+}
+.button:focus-visible,
+a:focus-visible {
+  outline-color: #1682c7;
+}
+.tip-card {
+  background: linear-gradient(135deg, #edf9ff, #e1f3ff);
+  border-color: #c9e8fc;
+}
+.tip-card > svg,
+.tip-card button {
+  color: #248dc9;
+}
+.tip-card b {
+  color: #24688f;
+}
+.tip-card p {
+  color: #7597ad;
+}
+.stat-title {
+  color: #718e9e;
+}
+.stat-title svg {
+  color: #71b0d8;
+}
+.stat strong {
+  color: #22516d;
+}
+.stat p {
+  color: #8aa4b3;
+}
+.person-avatar {
+  background: #edf6fd;
+  color: #5a91b7;
+}
+.badge.gold {
+  background: #fff0d9;
+  color: #b97620;
+}
+.prize-name {
+  color: #d67a30;
+}
+.prize-name svg {
+  color: #ee9a48;
+}
+.stock-track {
+  background: #e7f2f9;
+}
+.stock-track i {
+  background: linear-gradient(90deg, #ffbd57, #ff6a36);
+}
+.gift-art {
+  background: linear-gradient(145deg, #e6f6ff, #f6fbff);
+}
+.gift-art.art-1 {
+  background: linear-gradient(145deg, #fff3dc, #fffaf1);
+}
+.gift-art.art-2 {
+  background: linear-gradient(145deg, #f0e9ff, #f7f3ff);
+}
+.panel,
+.stats,
+.gift-card {
+  border-color: #dfebf3;
+  box-shadow: 0 4px 18px #509bce05;
+}
+.page-footer {
+  color: #98b2c3;
+}
+.stat + .stat:before {
+  border-color: #e4eff5;
+}
+.profile,
+.section-heading,
+.privacy-note {
+  border-color: #e5eff5;
+}
+.event-hero {
+  background: linear-gradient(112deg, #50baff 0%, #2fa9f2 57%, #b8eaff 100%);
+  min-height: 286px;
+  padding: 28px 34px;
+  color: #fff;
+  border: 1px solid #c4e9ff;
+  isolation: isolate;
+}
+.event-hero .hero-copy {
+  max-width: 57%;
+  flex: 1;
+}
+.campaign-partners {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #f6fcff;
+  margin-bottom: 8px;
+}
+.campaign-lockup {
+  font-size: 49px;
+  font-weight: 1000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: #fff2c4;
+  -webkit-text-stroke: 1.5px #f66530;
+  text-shadow:
+    2px 3px 0 #f4572b,
+    4px 6px 0 #d9402c,
+    5px 7px 0 #ffffff55;
+  transform: skew(-5deg);
+  padding: 2px 2px 10px;
+}
+.campaign-lockup span {
+  margin-left: 5px;
+}
+.hero-copy .event-status {
+  color: #e5f6ff;
+  font-size: 9px;
+  margin: 9px 0 5px;
+}
+.hero-copy .event-status i {
+  background: #fff0b3;
+}
+.hero-copy h2 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  font-weight: 550;
+}
+.hero-copy p {
+  font-size: 10px;
+  color: #e8f7ff;
+  margin-top: 4px;
+}
+.hero-button {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #fff5ce, #ffe39e);
+  color: #c25a24;
+  box-shadow: 0 3px 0 #e3a849;
+  border: 1px solid #ffedb4;
+  font-weight: 600;
+}
+.hero-button:hover:not(:disabled) {
+  background: #fff5cc;
+}
+.campaign-poster {
+  position: relative;
+  width: 43%;
+  max-width: 440px;
+  flex-shrink: 0;
+  z-index: 1;
+  margin: 0 0 0 22px;
+  transform: rotate(2deg);
+  border-radius: 10px;
+  border: 4px solid #ffefca;
+  box-shadow: 0 12px 25px #105b9d26;
+  background: #ffefca;
+  overflow: hidden;
+}
+.campaign-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.768;
+  object-fit: cover;
+}
+.campaign-poster > span {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #e17138;
+  padding: 6px;
+}
+.hero-orbit {
+  border-color: #ffffff20;
+  z-index: -1;
+}
+.draw-result {
+  background: linear-gradient(155deg, #dbf2ff, #f5fcff 55%, #fff1df);
+  border: 1px solid #badef5;
+  color: #285f82;
+}
+.draw-result > svg {
+  color: #f99a3c;
+}
+.draw-result h2 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #f15b2e;
+  line-height: 1.5;
+}
+.draw-result > p {
+  color: #7399b0;
+}
+.draw-result > small {
+  color: #90acbd;
+}
+.result-spark {
+  color: #ffbd6455;
+}
+.result-eyebrow {
+  color: #d48431;
+}
+.result-winners > div {
+  background: #fffaf0;
+  border-color: #ffd79a;
+  box-shadow: 0 4px 0 #edb95a20;
+}
+.result-winners b {
+  color: #ed632a;
+}
+.result-winners span {
+  color: #7a99a9;
+}
+.result-winners strong {
+  color: #bd853a;
+}
+.draw-person {
+  background: #f1faff;
+  border-color: #c8e5f7;
+}
+.large-avatar {
+  background: #dcefff;
+  color: #4793c6;
+}
+.segmented button.selected {
+  color: #e9672f;
+}
+.segmented {
+  background: #eef6fc;
+}
+.loading {
+  background: #eaf8ff;
+  color: #2589c5;
+}
+/* 登录页直接展示原始品牌主视觉，不重新绘制品牌标识。 */
+.login {
+  grid-template-columns: minmax(0, 1.45fr) minmax(390px, 1fr);
+}
+.campaign-login-story {
+  background: radial-gradient(
+    ellipse at 30% 15%,
+    #c4eaff,
+    #5abdf3 55%,
+    #35a2eb
+  );
+  padding: 40px 40px 35px;
+  min-height: 100vh;
+  gap: 25px;
+  justify-content: space-between;
+}
+.campaign-login-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  width: 100%;
+}
+.campaign-login-top > span {
+  background: #fff8;
+  padding: 5px 12px;
+  border-radius: 30px;
+  color: #2879a7;
+  font-weight: 600;
+}
+.campaign-login-top b {
+  font-size: 11px;
+  font-weight: 400;
+}
+.campaign-login-kv {
+  width: calc(100% + 80px);
+  max-width: none;
+  margin: 0 -40px;
+  display: block;
+  box-shadow: 0 0 65px #a2e6ff66;
+}
+.campaign-login-caption h1 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 32px;
+  color: #fff3cf;
+  font-weight: 800;
+  line-height: 1.4;
+  text-shadow: 1px 2px 0 #ed773d;
+  margin: 0 0 12px;
+  letter-spacing: 1px;
+}
+.campaign-login-story > .campaign-login-caption > p:last-child {
+  font-size: 12px;
+  color: #f5fcff;
+  display: block;
+  line-height: 1.7;
+}
+.login-form > h2 {
+  color: #245775;
+}
+.login-form > small {
+  color: #8eabbb;
+}
+/* 大屏将参考画面的中心留空，叠加真实文字与结果。自定义背景依旧可覆盖。 */
+.stage {
+  background-image:
+    linear-gradient(0deg, #ffffff0d, #ffffff04),
+    url("/campaign/stage-bg.webp");
+  background-color: #58bff7;
+  color: #20567a;
+  padding: 22px 4vw 20px;
+  min-height: 100vh;
+}
+.stage-brand {
+  background: #ffffffd9;
+  color: #2778a6;
+  border: 1px solid #fff;
+  border-radius: 7px;
+  padding: 7px 13px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px #227fb414;
+}
+.stage-brand svg {
+  color: #ff7836;
+}
+.stage-header > img {
+  background: #ffffffde;
+  border-radius: 6px;
+  padding: 6px;
+}
+.stage-tools {
+  opacity: 1;
+  color: #286b93;
+}
+.stage-tools a {
+  background: #f4fbffd9;
+  border-radius: 5px;
+  padding: 7px 10px;
+}
+.stage-tools button {
+  background: #f4fbffd9;
+  border: 1px solid #fff;
+  color: #286b93;
+}
+.stage-title {
+  margin-top: 13px;
+}
+.stage-campaign-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.stage-campaign-title > span {
+  font-size: 11px;
+  color: #fff;
+  background: linear-gradient(145deg, #ff8750, #f64c2d);
+  border: 1px solid #ffbc82;
+  padding: 5px 10px;
+  box-shadow: 0 3px 0 #dd5729;
+  border-radius: 5px;
+  transform: rotate(-5deg);
+}
+.stage-campaign-title strong {
+  font-size: clamp(38px, 4.9vw, 76px);
+  line-height: 1.25;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #fff0b5;
+  font-weight: 1000;
+  letter-spacing: -2px;
+  -webkit-text-stroke: 2px #ff693a;
+  text-shadow:
+    2px 3px 0 #ff562e,
+    4px 6px 0 #d83a26,
+    5px 8px 0 #ffffff66;
+  transform: skew(-5deg);
+}
+.stage-campaign-title em {
+  font-size: clamp(18px, 2vw, 30px);
+  font-weight: 800;
+  color: #fff7e1;
+  font-style: normal;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, #ff9940, #f74b2b);
+  padding: 7px 14px;
+  border: 2px solid #fff1b5;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #e36528;
+}
+.stage-title h1 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: clamp(18px, 2vw, 30px);
+  line-height: 1.4;
+  font-weight: 650;
+  letter-spacing: 2px;
+  color: #246b95;
+  margin-top: 16px;
+  text-shadow: 0 1px 0 #fff9;
+}
+.stage-title > span {
+  font-size: 11px;
+  color: #4a8bb0;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+.stage-center {
+  background: linear-gradient(145deg, #ffffffed, #e9f8fff0);
+  border: 2px solid #fff;
+  outline: 1px solid #9bd7f4;
+  border-radius: 24px;
+  max-width: 1260px;
+  width: 84%;
+  margin: 24px auto 20px;
+  padding: 25px 35px;
+  gap: 4vw;
+  grid-template-columns: 30% minmax(0, 1fr);
+  box-shadow:
+    0 15px 40px #267bb428,
+    0 5px 0 #ffffff80;
+  flex: 0 1 auto;
+  min-height: 420px;
+  max-height: 60vh;
+}
+.stage-gift-frame {
+  border-radius: 16px;
+  border: 2px solid #ffe3a7;
+  background: linear-gradient(155deg, #fff9e9, #fff0cd);
+  box-shadow: 0 7px 0 #eacb8c30;
+  padding: 12px 18px;
+}
+.stage-gift .gift-art,
+.stage-gift .gift-image {
+  height: 220px;
+  background: transparent;
+}
+.stage-gift .gift-art small {
+  color: #ba8c45;
+}
+.stage-gift h2 {
+  font-size: 19px;
+  font-weight: 650;
+  color: #dc762d;
+  letter-spacing: 1px;
+  margin: 19px 0 6px;
+}
+.stage-gift > span {
+  color: #b48d54;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.stage-reveal {
+  min-height: 320px;
+  padding: 10px 0;
+}
+.stage-section-title {
+  margin-bottom: 20px;
+  gap: 15px;
+}
+.stage-section-title b {
+  color: #ee6835;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+.stage-section-title > span {
+  background: linear-gradient(90deg, transparent, #fab56c99);
+}
+.stage-wait > span {
+  color: #ffb246;
+  font-size: 58px;
+}
+.stage-wait h2 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #2583b9;
+  font-size: 39px;
+  letter-spacing: 3px;
+  font-weight: 750;
+}
+.stage-wait p {
+  color: #7fa4bb;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 17px;
+}
+.stage-winners article {
+  background: linear-gradient(150deg, #fff9e7, #fff4d9);
+  border: 1px solid #ffd495;
+  min-height: 115px;
+  border-radius: 10px;
+  box-shadow: 0 3px 0 #f5c97525;
+  padding: 15px 8px;
+}
+.stage-winners b {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #ec622c;
+  font-size: 27px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+.stage-winners span {
+  color: #7394a5;
+}
+.stage-winners small {
+  color: #8da4ad;
+}
+.stage-winners.single-winner article {
+  background: transparent;
+  box-shadow: none;
+}
+.stage-winners.single-winner b {
+  font-size: clamp(45px, 6vw, 88px);
+  letter-spacing: 5px;
+  color: #f0662a;
+  line-height: 1.5;
+  text-shadow: 0 3px 0 #ffe6ad;
+}
+.stage-winners.single-winner span {
+  color: #4a86a7;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.stage-winners.single-winner small {
+  color: #80a7bb;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.stage-drawing {
+  color: #ff9736;
+}
+.stage-drawing h2 {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #eb632c;
+  font-size: 40px;
+  font-weight: 750;
+}
+.stage-drawing p {
+  color: #72a2bc;
+  font-size: 11px;
+}
+.stage-footer {
+  margin-top: auto;
+  border: 0;
+  padding-top: 12px;
+  font-size: 10px;
+  color: #8c672a;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 #fff9;
+  font-weight: 500;
+}
+.stage-footer > span {
+  background: #fffae8e6;
+  padding: 6px 12px;
+  border: 1px solid #ffe2a0;
+  border-radius: 25px;
+}
+.stage-halo {
+  display: none;
+}
+.stage-pagination {
+  color: #76a4bc;
+  font-size: 10px;
+}
+.stage-error {
+  background: #fff0e5e8;
+  color: #b85a29;
+  border: 1px solid #ffcc9a;
+}
+@media (min-width: 1600px) {
+  .event-hero {
+    min-height: 310px;
+  }
+  .campaign-lockup {
+    font-size: 57px;
+  }
+  .stage-center {
+    margin-top: 35px;
+    min-height: 480px;
+  }
+  .stage-gift .gift-art,
+  .stage-gift .gift-image {
+    height: 260px;
+  }
+}
+@media (max-width: 1150px) {
+  .campaign-lockup {
+    font-size: 39px;
+  }
+  .event-hero {
+    padding: 24px;
+  }
+  .campaign-poster {
+    margin-left: 15px;
+  }
+  .hero-copy h2 {
+    font-size: 17px;
+  }
+  .stage-center {
+    width: 90%;
+    padding: 23px;
+    gap: 3vw;
+  }
+  .stage-gift .gift-art,
+  .stage-gift .gift-image {
+    height: 190px;
+  }
+}
+@media (max-width: 900px) {
+  .campaign-poster {
+    width: 40%;
+  }
+  .campaign-poster > span {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .campaign-lockup {
+    font-size: 35px;
+  }
+  .event-hero .hero-copy {
+    max-width: 60%;
+  }
+  .campaign-login-story {
+    padding: 30px;
+  }
+  .campaign-login-kv {
+    width: calc(100% + 60px);
+    margin: 0 -30px;
+  }
+  .login {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stage-center {
+    width: 94%;
+    min-height: 380px;
+  }
+  .stage-winners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stage-winners article {
+    min-height: 95px;
+  }
+  .stage-campaign-title strong {
+    font-size: 43px;
+  }
+  .stage-campaign-title em {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}
+@media (max-width: 700px) {
+  .event-hero {
+    min-height: 285px;
+    padding: 24px 20px;
+    align-items: flex-start;
+  }
+  .event-hero .hero-copy {
+    max-width: 100%;
+    z-index: 3;
+  }
+  .campaign-lockup {
+    font-size: 42px;
+    max-width: 75%;
+  }
+  .campaign-partners {
+    font-size: 8px;
+  }
+  .hero-copy h2 {
+    font-size: 15px;
+    max-width: 75%;
+    margin-top: 7px;
+  }
+  .hero-copy p {
+    max-width: 70%;
+    font-size: 9px;
+  }
+  .campaign-poster {
+    position: absolute;
+    right: -40px;
+    bottom: 12px;
+    width: 175px;
+    transform: rotate(-9deg);
+    opacity: 0.58;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero-copy .event-status {
+    margin-top: 10px;
+  }
+  .hero-button {
+    margin-top: 16px;
+  }
+  .login {
+    grid-template-columns: 1fr;
+  }
+  .campaign-login-story {
+    min-height: 0;
+    padding: 18px 20px 24px;
+    gap: 16px;
+  }
+  .campaign-login-top {
+    font-size: 9px;
+  }
+  .campaign-login-top b {
+    font-size: 9px;
+  }
+  .campaign-login-kv {
+    width: calc(100% + 40px);
+    margin: 0 -20px;
+    max-height: 260px;
+    object-fit: cover;
+  }
+  .campaign-login-caption {
+    display: none;
+  }
+  .login-form {
+    padding: 30px 0;
+  }
+  .stage {
+    padding: 16px 12px;
+    min-height: 100dvh;
+    background-position: center;
+    background-size: auto 100%;
+  }
+  .stage-title {
+    margin-top: 20px;
+  }
+  .stage-campaign-title {
+    gap: 9px;
+  }
+  .stage-campaign-title > span {
+    font-size: 8px;
+    padding: 3px 6px;
+  }
+  .stage-campaign-title strong {
+    font-size: 36px;
+    -webkit-text-stroke: 1px #ff693a;
+    letter-spacing: -1px;
+    text-shadow:
+      1px 2px 0 #ff562e,
+      2px 4px 0 #d83a26;
+  }
+  .stage-campaign-title em {
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 5px 8px;
+  }
+  .stage-title h1 {
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-top: 16px;
+  }
+  .stage-title > span {
+    font-size: 9px;
+  }
+  .stage-center {
+    width: 94%;
+    min-height: 360px;
+    max-height: none;
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+    margin: 22px auto 28px;
+    padding: 20px 14px;
+  }
+  .stage-reveal {
+    min-height: 290px;
+  }
+  .stage-wait h2 {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+  .stage-winners.single-winner b {
+    font-size: 56px;
+  }
+  .stage-winners.single-winner span {
+    font-size: 13px;
+  }
+  .stage-winners.single-winner small {
+    font-size: 11px;
+  }
+  .stage-footer {
+    font-size: 8px;
+    gap: 9px;
+  }
+  .stage-footer > span {
+    padding: 5px 8px;
+  }
+  .stage-brand {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+  .stage-section-title b {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .stage-section-title {
+    gap: 10px;
+  }
+  .stage-winners b {
+    font-size: 23px;
+  }
+  .stage-winners article {
+    min-height: 100px;
+  }
+  .stage-tools {
+    gap: 8px;
+  }
+  .stage-tools a {
+    padding: 5px 7px;
+  }
+  .stage-tools button {
+    padding: 5px 7px;
+  }
+}

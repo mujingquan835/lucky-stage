@@ -1,0 +1,60 @@
+{
+  "name": "lucky-stage",
+  "version": "1.0.0",
+  "description": "幸运现场（Lucky Stage）—— 面向年会、沙龙与线下活动的企业级 Web 抽奖系统，支持大屏投屏、主持控制台、手机遥控、自助抽奖码与事务级防超发。",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mujingquan835/lucky-stage.git"
+  },
+  "keywords": [
+    "lottery",
+    "event-lottery",
+    "annual-meeting",
+    "live-stage",
+    "react",
+    "typescript",
+    "postgresql",
+    "pglite"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "node --import tsx --watch server/index.ts",
+    "build": "vite build --config vite.config.ts",
+    "start": "node --import tsx server/index.ts",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "node tests/e2e.mjs",
+    "test:pressure": "node --import tsx scripts/pressure-test.mjs",
+    "backup": "node --import tsx scripts/snapshot.ts backup",
+    "restore": "node --import tsx scripts/snapshot.ts restore",
+    "format": "prettier --write server web/src scripts tests vite.config.ts",
+    "format:check": "prettier --check server web/src scripts tests vite.config.ts",
+    "local:start": "node scripts/local-service.mjs start",
+    "local:status": "node scripts/local-service.mjs status"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.3.14",
+    "exceljs": "4.4.0",
+    "express": "5.2.1",
+    "pg": "8.23.0",
+    "qrcode": "^1.5.4",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "sharp": "^0.34.5",
+    "tsx": "4.20.6"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "24.10.1",
+    "@types/pg": "8.15.6",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "4.7.0",
+    "jszip": "^3.10.1",
+    "playwright": "1.56.1",
+    "prettier": "^3.6.2",
+    "typescript": "5.9.3",
+    "vite": "6.4.3"
+  }
+}
