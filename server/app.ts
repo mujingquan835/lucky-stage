@@ -495,13 +495,13 @@ export function createApp(db: Db, c: Config) {
     } catch {
       throw new AppError("图片不存在", 404);
     }
-    res.type("webp").sendFile(path);
+    res.type("webp").sendFile(req.params.file, { root: c.uploadDir });
   });
   app.use("/api", (_req, res) => res.status(404).json({ error: "接口不存在" }));
   if (c.distDir) {
     app.use(express.static(c.distDir));
     app.get("/{*splat}", (_req, res) =>
-      res.sendFile(resolve(c.distDir!, "index.html")),
+      res.sendFile("index.html", { root: c.distDir! }),
     );
   }
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
