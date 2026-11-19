@@ -132,6 +132,12 @@ export type StageView = {
   } | null;
   participants: { id: string; name: string; company: string; store: string; photo?: string }[];
   plans: RoundPlan[];
+  checkin?: {
+    enabled: boolean;
+    open: boolean;
+    count: number;
+    recent: { name: string; createdAt: number }[];
+  };
 };
 export const defaultStageConfig = (): StageConfig => ({
   animation: "reels",
@@ -139,7 +145,7 @@ export const defaultStageConfig = (): StageConfig => ({
   celebrate: true,
   volume: 0.4,
   music: "",
-  welcomeText: "欢迎来到幸运现场",
+  welcomeText: "欢迎来到燃动双11幸运现场",
   endText: "感谢相聚，让幸运继续",
 });
 export function usesPortraits(view: StageView | null) {

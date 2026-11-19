@@ -71,5 +71,9 @@ export async function createDb(location?: string): Promise<Db> {
   );
   await db.query(`CREATE TABLE IF NOT EXISTS participant_sessions(token_hash TEXT PRIMARY KEY, activity_id TEXT NOT NULL, person_id TEXT NOT NULL, code_hash TEXT NOT NULL, expires BIGINT NOT NULL)`);
   await db.query("CREATE INDEX IF NOT EXISTS participant_sessions_expires ON participant_sessions(expires)");
+  await db.query(`CREATE TABLE IF NOT EXISTS checkin_entries(id TEXT PRIMARY KEY, activity_id TEXT NOT NULL, name TEXT NOT NULL, phone TEXT NOT NULL, company TEXT NOT NULL DEFAULT '', store TEXT NOT NULL DEFAULT '', extra JSONB NOT NULL DEFAULT '{}'::jsonb, request_id TEXT NOT NULL DEFAULT '', created_at BIGINT NOT NULL, synced_person_id TEXT)`);
+  await db.query(`ALTER TABLE checkin_entries ADD COLUMN IF NOT EXISTS extra JSONB NOT NULL DEFAULT '{}'::jsonb`);
+  await db.query("CREATE UNIQUE INDEX IF NOT EXISTS checkin_entries_activity_phone ON checkin_entries(activity_id, phone)");
+  await db.query("CREATE INDEX IF NOT EXISTS checkin_entries_activity_created ON checkin_entries(activity_id, created_at DESC)");
   return db;
 }

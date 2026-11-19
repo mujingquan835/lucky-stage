@@ -1,5 +1,7 @@
 import { randomInt, randomUUID, createHash } from "node:crypto";
 import type { Db, Sql } from "./db.ts";
+import { syncCheckinToActivity } from "./checkin-service.ts";
+import type { CheckinConfig } from "../shared/checkin.ts";
 import {
   defaultStageConfig,
   defaultStageSession,
@@ -33,6 +35,7 @@ export type Person = {
   enabled: boolean;
   checkedIn?: boolean;
   checkedInAt?: string;
+  extra?: Record<string, string>;
 };
 export type Gift = {
   id: string;
@@ -89,6 +92,7 @@ export const roundRevealed = (r: Round) => !r.selfRevealAt || Date.parse(r.selfR
 export type RoundReceipt = Omit<Round, "fingerprint" | "receipt">;
 export type Activity = {
   selfService?: { enabled: boolean; startsAt: string; endsAt: string; codes: Record<string,string> };
+  checkin?: CheckinConfig;
   testMode?: boolean;
   testingOps?: { requestId: string; fingerprint: string; response: any }[];
   id: string;
@@ -147,7 +151,7 @@ export const text = (v: unknown, max = 120) => {
   if (t.length > max) throw new AppError(`文字不能超过 ${max} 字`);
   return t;
 };
-const required = (v: unknown, label: string, max = 120) => {
+export const required = (v: unknown, label: string, max = 120) => {
   const t = text(v, max);
   if (!t) throw new AppError(`请填写${label}`);
   return t;
@@ -244,6 +248,7 @@ export async function deleteActivity(db: Db, id: string) {
     advanceStage(a);
     if (stageIsActive(a)) throw new AppError("抽奖进行中，请先完成揭晓");
     await sql.query("DELETE FROM participant_sessions WHERE activity_id=$1", [id]);
+    await sql.query("DELETE FROM checkin_entries WHERE activity_id=$1", [id]);
     await sql.query("DELETE FROM activities WHERE id=$1", [id]);
   });
 }
@@ -340,6 +345,7 @@ export async function clearPeople(db: Db, id: string, input: {requestId:string; 
     return response;
   }).then(async (res) => {
     await db.query("DELETE FROM participant_sessions WHERE activity_id=$1", [id]);
+    await db.query("DELETE FROM checkin_entries WHERE activity_id=$1", [id]);
     return res;
   });
 }
@@ -895,6 +901,7 @@ export async function draw(
 ): Promise<RoundReceipt> {
   return db.transaction(async (sql) => {
     const a = await readActivity(sql, id, true);
+    await syncCheckinToActivity(sql, a);
     const result = drawInActivity(a, input);
     await persist(sql, a);
     return result;

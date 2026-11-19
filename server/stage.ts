@@ -1,6 +1,11 @@
 import { createHash, randomUUID } from "node:crypto";
 import type { Db } from "./db.ts";
 import {
+  checkinOpenState,
+  getCheckinSummary,
+  syncCheckinToActivity,
+} from "./checkin-service.ts";
+import {
   AppError,
   roundRevealed,
   readActivity,
@@ -281,6 +286,9 @@ export async function stageCommand(db: Db, id: string, input: StageCommand) {
       if (advanced) await persist(sql, a);
       return { conflict: true as const };
     }
+    if (input.action === "prepare" || input.action === "start") {
+      await syncCheckinToActivity(sql, a);
+    }
     const response = operate(a, input);
     a.stageOps.push({
       requestId: input.requestId,
@@ -390,6 +398,20 @@ export async function getStage(db: Db, id: string, host = false): Promise<StageV
       store: a.showStore ? p.store : "",
     })),
     plans: host ? a.roundPlans : a.roundPlans.map(({ assignedPersonIds: _, ...plan }) => plan),
+    ...(a.checkin?.enabled
+      ? await (async () => {
+          const summary = await getCheckinSummary(db, id);
+          const { open } = checkinOpenState(a.checkin, a.archived);
+          return {
+            checkin: {
+              enabled: true,
+              open,
+              count: summary.totalCount,
+              recent: summary.recent,
+            },
+          };
+        })()
+      : {}),
   };
 }
 export async function saveRoundPlan(db: Db, id: string, input: any) {

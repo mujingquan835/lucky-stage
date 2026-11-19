@@ -1,4 +1,5 @@
 import { Participate, SelfStage } from "./SelfService";
+import { CheckinPage } from "./CheckinPage";
 import {
   useState,
   useEffect,
@@ -36,6 +37,7 @@ const tabs: { key: Tab; label: string; icon: string }[] = [
 ];
 export default function App() {
   if (location.pathname.startsWith("/participate/")) return <Participate id={location.pathname.split("/")[2]} />;
+  if (location.pathname.startsWith("/checkin/")) return <CheckinPage id={location.pathname.split("/")[2]} />;
   return <AdminApp />;
 }
 function AdminApp() {
@@ -48,7 +50,7 @@ function AdminApp() {
       .finally(() => setChecking(false));
   }, []);
   if (checking)
-    return <div className="loading">正在连接幸运现场抽奖工作台…</div>;
+    return <div className="loading">正在连接燃动双11抽奖工作台…</div>;
   if (!user) return <Login onLogin={setUser} />;
   if (location.pathname.startsWith("/host/"))
     return <MobileHost id={location.pathname.split("/")[2]} />;
@@ -80,17 +82,17 @@ function Login({ onLogin }: { onLogin: (u: string) => void }) {
     <div className="login">
       <div className="login-story campaign-login-story">
         <div className="campaign-login-top">
-          <span>Lucky Stage</span>
+          <span>2026 购房节</span>
           <b>活动抽奖工作台</b>
         </div>
         <img
           className="campaign-login-kv"
-          src="/campaign/hero-kv.jpg"
-          alt="幸运现场活动主视觉"
+          src="/campaign/double11-kv.jpg"
+          alt="58同城 安居客 2026燃动双11活动主视觉"
         />
         <div className="campaign-login-caption">
-          <h1>幸运开场，好礼相随。</h1>
-          <p>导入参与名单与奖品库存，开启专属幸运时刻。</p>
+          <h1>燃动好礼，幸运开场。</h1>
+          <p>准备来宾名单，开启双11专属幸运时刻。</p>
         </div>
       </div>
       <div className="login-form">
@@ -505,7 +507,7 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
             <Icon name="spark" size={24} />
           </span>
           <span>
-            幸运现场<small>活动抽奖工作台</small>
+            燃动双11<small>活动抽奖工作台</small>
           </span>
         </a>
         <div className="sidebar-label">工作空间</div>
@@ -776,10 +778,10 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
                   >
                     <div className="hero-copy">
                       <span className="campaign-partners">
-                        Lucky Stage · 活动抽奖工作台
+                        58同城 × 安居客 · 2026 购房节
                       </span>
                       <div className="campaign-lockup">
-                        幸运<span>现场</span>
+                        燃动<span>双11</span>
                       </div>
                       <span className="event-status">
                         <i />
@@ -802,8 +804,8 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
                     </div>
                     <div className="campaign-poster">
                       <img
-                        src="/campaign/hero-kv.jpg"
-                        alt="幸运现场主视觉"
+                        src="/campaign/double11-kv.jpg"
+                        alt="燃动双11主视觉"
                       />
                       <span>好礼不断 · 幸运翻倍</span>
                     </div>
@@ -1071,6 +1073,26 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
                       </button>
                       <button className="button small" disabled={s.archived || busy || !s.people.length}
                         onClick={() => setModal("person-photos")}>批量匹配照片</button>
+                      {s.checkin?.enabled && (
+                        <button
+                          className="button small"
+                          disabled={s.archived || busy}
+                          onClick={async () => {
+                            setBusy(true);
+                            setError("");
+                            try {
+                              await api(path + "/checkin/sync", "POST", {});
+                              await refresh();
+                            } catch (e) {
+                              setError((e as Error).message);
+                            } finally {
+                              setBusy(false);
+                            }
+                          }}
+                        >
+                          同步扫码名单
+                        </button>
+                      )}
                       <button
                         className="button small"
                         disabled={s.archived || busy || drawing || !!pending || !s.people.length}
@@ -1131,6 +1153,13 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
                                   </span>
                                   <b>{p.name}</b>
                                 </span>
+                                {p.extra && Object.keys(p.extra).length > 0 && (
+                                  <small style={{ display: "block", color: "#7d625f", marginTop: 2 }}>
+                                    {Object.entries(p.extra)
+                                      .map(([k, v]) => `${k}: ${v}`)
+                                      .join(" · ")}
+                                  </small>
+                                )}
                               </td>
                               
                               <td className="phone-cell">{p.phone}</td>
@@ -1532,7 +1561,7 @@ function Dashboard({ user, onLogout }: { user: string; onLogout: () => void }) {
             </>
           )}
           <footer className="page-footer">
-            <span>幸运现场 · 好礼不断，幸运相随</span>
+            <span>燃动双11 · 好礼不断，幸运相随</span>
             <span>名单与抽奖记录安全保存</span>
           </footer>
         </main>

@@ -200,7 +200,7 @@ export default function Stage({ id }: { id: string }) {
         ) : (
           <span className="stage-brand">
             <Icon name="spark" />
-            幸运现场
+            燃动双11
           </span>
         )}
         <div className="v2-tools-wrap">
@@ -265,7 +265,7 @@ export default function Stage({ id }: { id: string }) {
         </div>
       )}
       <div className="stage-title v2-title">
-        <img className="stage-title-art" src="/campaign/stage-title.png" alt="幸运现场 超级豪礼抽不停" />
+        <img className="stage-title-art" src="/campaign/stage-title-v4.png" alt="燃动双11 超级豪礼抽不停" />
         {view?.testMode && <strong className="stage-test-label">【测试模式】</strong>}
       </div>
 
@@ -285,6 +285,30 @@ export default function Stage({ id }: { id: string }) {
               期待每一个幸运时刻
             </span>
           </div>
+          {view?.checkin?.enabled && (
+            <div className="v2-checkin-card" aria-label="现场扫码报名">
+              <img
+                className="v2-checkin-qr"
+                src={`/api/activities/${encodeURIComponent(id)}/checkin/qr`}
+                alt="扫码参与抽奖二维码"
+              />
+              <div className="v2-checkin-meta">
+                <strong>
+                  {view.checkin.open ? "微信 / 手机扫码参与抽奖" : "扫码报名已暂停"}
+                </strong>
+                <div className="v2-checkin-count">
+                  已入池 <b>{view.checkin.count}</b> 人
+                </div>
+                {view.checkin.recent.length > 0 && (
+                  <div className="v2-checkin-recent">
+                    {view.checkin.recent.slice(0, 6).map((item, idx) => (
+                      <span key={`${item.createdAt}-${idx}`}>{item.name}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           {view?.plans.length ? (
             <div className="v2-plan-ribbon" aria-label="本场奖项安排">
               {view.plans
@@ -448,7 +472,7 @@ export default function Stage({ id }: { id: string }) {
       )}
 
       <footer className="stage-footer v2-footer">
-        <span>幸运现场 · Lucky Stage</span>
+        <span>58同城 × 安居客 · 燃动双11</span>
         <span>
           {view?.archived
             ? "本场活动已归档"

@@ -1,4 +1,5 @@
 import { publicSelfRoutes, adminSelfRoutes } from "./self-routes.ts";
+import { publicCheckinRoutes, adminCheckinRoutes } from "./checkin-routes.ts";
 import express, {
   type Request,
   type Response,
@@ -47,7 +48,7 @@ import { createTestActivity, testData } from "./testing.ts";
 import { validateAudio } from "./audio.ts";
 import { hashToken, passwordCheck, parseToken } from "./security.ts";
 import { workbook, template, parseWorkbook } from "./workbooks.ts";
-const libraryNames = ["智能体脂秤", "保暖手套", "保温杯", "便携充电宝", "手持挂烫机", "桌面暖风机", "空气炸锅", "高速吹风机", "定制礼盒套装", "大号鼠标垫"];
+const libraryNames = ["体脂秤", "保温手套", "小米保温杯", "小米充电宝", "小米挂烫机", "小米电暖气", "小米空气炸锅", "徕芬吹风机", "笔本套装", "鼠标垫"];
 const libraryDir = fileURLToPath(new URL("./gift-library/", import.meta.url));
 const qr = createRequire(import.meta.url)("qrcode") as {
   toBuffer: (value: string, options: { width: number; margin: number }) => Promise<Buffer>;
@@ -138,6 +139,7 @@ export function createApp(db: Db, c: Config) {
     res.json({ username: c.adminUser });
   });
   publicSelfRoutes(app, db, c);
+  publicCheckinRoutes(app, db);
   app.use("/api", async (req, res, next) => {
     const token = parseToken(req.headers.cookie);
     if (!/^[a-f0-9]{64}$/.test(token)) throw new AppError("请先登录", 401);
@@ -150,11 +152,12 @@ export function createApp(db: Db, c: Config) {
     next();
   });
   adminSelfRoutes(app, db);
+  adminCheckinRoutes(app, db, c, qr);
   app.get("/api/gift-library", (_req, res) => res.json(libraryNames.map((name, i) => ({ name, image: `/api/gift-library/images/${i}` }))));
   app.get("/api/gift-library/images/:id", (req, res) => {
     if (!/^(0|[1-9]\d*)$/.test(req.params.id) || Number(req.params.id) >= libraryNames.length)
       throw new AppError("图片不存在", 404);
-    res.type("webp").sendFile(`${req.params.id}.webp`, { root: libraryDir });
+    res.type("webp").sendFile(resolve(libraryDir, `${req.params.id}.webp`));
   });
   app.get("/api/auth/me", (_req, res) => res.json({ username: c.adminUser }));
   app.post("/api/auth/logout", async (req, res) => {
@@ -206,7 +209,7 @@ export function createApp(db: Db, c: Config) {
       names.map((name, i) => ({
         name,
         phone: `1380000${String(i + 1).padStart(4, "0")}`,
-        company: ["星河科技", "晨曦传媒", "远景咨询"][i % 3],
+        company: ["示例置业", "示例房产", "示例地产"][i % 3],
         store: ["滨江门店", "中央公园店", "星河门店", "望江门店"][i % 4],
       })),
     );
@@ -495,13 +498,13 @@ export function createApp(db: Db, c: Config) {
     } catch {
       throw new AppError("图片不存在", 404);
     }
-    res.type("webp").sendFile(req.params.file, { root: c.uploadDir });
+    res.type("webp").sendFile(path);
   });
   app.use("/api", (_req, res) => res.status(404).json({ error: "接口不存在" }));
   if (c.distDir) {
     app.use(express.static(c.distDir));
     app.get("/{*splat}", (_req, res) =>
-      res.sendFile("index.html", { root: c.distDir! }),
+      res.sendFile(resolve(c.distDir!, "index.html")),
     );
   }
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

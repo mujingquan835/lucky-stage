@@ -5,12 +5,14 @@ import { api, upload } from "./api";
 import { Icon } from "./components";
 import RoundSettings from "./RoundSettings";
 import { SelfSettings } from "./SelfService";
+import { CheckinSettings } from "./CheckinPage";
 import "./activity-settings.css";
 
 const categories = [
   { id: "basics", title: "基本信息", icon: "edit" },
   { id: "rounds", title: "抽奖轮次", icon: "list" },
   { id: "stage", title: "舞台与展示", icon: "screen" },
+  { id: "checkin", title: "扫码报名", icon: "people" },
   { id: "self", title: "自主抽奖", icon: "play" },
   { id: "management", title: "活动管理", icon: "settings" },
 ] as const;
@@ -34,6 +36,7 @@ export default function ActivitySettings({ activity, section, setSection, refres
       {section === "basics" && <SettingsForm key="basics" activity={activity} refresh={refresh} />}
       {section === "rounds" && <RoundSettings activity={activity} refresh={refresh} openHost={openHost} />}
       {section === "stage" && <SettingsForm key="stage" activity={activity} refresh={refresh} stage />}
+      {section === "checkin" && <CheckinSettings key={activity.id} activity={activity} refresh={refresh} />}
       {section === "self" && <SelfSettings key={activity.id} activity={activity} refresh={refresh} />}
       {section === "management" && <section className="panel settings-content">
         <header className="settings-heading"><div><h2>活动管理</h2><p>复制、归档或删除活动，查看操作记录。</p></div></header>
